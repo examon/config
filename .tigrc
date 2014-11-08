@@ -1,0 +1,11 @@
+# Override the default terminal colors to white on black.
+color default           white   default
+
+# Diff colors
+color cursor            yellow  black
+color status            white   default
+color title-focus       white   black
+color title-blur        white   black
+
+# View specific color
+color tree.date         white   default

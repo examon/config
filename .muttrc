@@ -1,0 +1,152 @@
+hdr_order From: To: Subject: Date: Message-id:
+
+
+source ~/.mutt/colors/solarized_dark.muttrc
+
+set edit_headers
+set charset = "utf8"
+set rfc2047_parameters = yes
+set send_charset = us-ascii:iso-8859-2:utf-8
+set timeout = 3 # idle time before scanning
+set sort_alias = alias # sort alias file by alias
+set reverse_alias # show names from alias file in index
+unset move # gmail does that
+set quit = ask-yes # confirm quit
+unset mark_old # read/new is good enough for me
+set beep_new # bell on new mails
+set pipe_decode # strip headers and eval mimes when piping
+unset help
+set sort = threads # like gmail
+set sort_aux = reverse-last-date-received # like gmail
+set uncollapse_jump # don't collapse on an unread message
+set sort_re # thread based on regex
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+set sleep_time = 0 # speed up folder switch
+
+# pager options
+set pager_index_lines = 10 # number of index lines to show
+set pager_context = 5 # number of context lines to show
+set pager_stop # don't go to next message automatically
+set menu_scroll # scroll in menus
+set smart_wrap # don't split words
+set tilde # show tildes like in vim
+unset markers # no ugly plus signs
+alternative_order text/plain text/enriched text/html # save html for last
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+set status_on_top # as you'd expect
+
+# formats
+set date_format = "%d/%m/%y at %I:%M%P"
+set index_format = "%3C %S %D • %-35.35L %s %> %c"
+set pager_format = "Reading message %C of %m %> %lL [%P]" # pager statusbar
+set folder_format = "%2C %t %N %8s %d %f %n" # mailbox list view
+set status_format = " %?M?%M/?%m Mails %?n?%n new, ?%?u?%u unread, ?%?p?%p drafts, ?%?t?%t +tagged, ?%?d?%d deleted, ?[%f %l] %?b?%b unread messages. ?%> %V sort by: %s/%S [%P]"
+set alias_format = "%4n %t %-20a %r"
+auto_view text/html
+#set index_format="%6C %Z %{%b %d} %-18.18F (%4c) %-4.4H %?L?[%L] ?%s"
+
+
+#=-----=#
+# diffs #
+#=-----=#
+color body green default "^diff \-.*"
+color body green default "^index [a-f0-9].*"
+color body green default "^\-\-\- .*"
+color body green default "^[\+]{3} .*"
+color body cyan default "^[\+][^\+]+.*"
+color body red  default "^\-[^\-]+.*"
+color body brightblue default "^@@ .*"
+
+
+#=---------=#
+# acc stuff #
+#=---------=#
+set imap_user="exo@tty.sk"
+set imap_pass=""
+set imap_keepalive = 300
+unset imap_passive
+set mail_check = 60
+set mbox_type=Maildir
+
+set smtp_url="smtps://exo@tty.sk@smtp.websupport.sk:465/"
+set smtp_pass=""
+set from="exo@tty.sk"
+set realname="Tomas Meszaros"
+set ssl_force_tls=yes
+
+set folder="~/Mail/"
+set spoolfile="~/Mail/INBOX"
+set postponed="~/Mail/INBOX.Drafts"
+set record="~/Mail/INBOX.Sent"
+
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+
+
+#=-------=#
+# aliases #
+#=-------=#
+set alias_file=~/.mutt/aliases
+source	~/.mutt/aliases
+set sort_alias=alias
+
+
+#=------=#
+# macros #
+#=------=#
+macro index gi "<change-folder>=INBOX<enter>"
+macro index gd "<change-folder>=INBOX.Drafts<enter>"
+macro index gs "<change-folder>=INBOX.Sent<enter>"
+macro index gj "<change-folder>=INBOX.Junk<enter>"
+macro index gt "<change-folder>=INBOX.Trash<enter>"
+macro index gl "<change-folder>=INBOX.libvirt<enter>"
+
+
+#=-------=#
+# sidebar #
+#=-------=#=------------------------------=#
+# http://www.lunar-linux.org/mutt-sidebar/ #
+#=----------------------------------------=#
+set sidebar_width=30
+set sidebar_visible=yes
+set sidebar_delim='  '
+set sidebar_sort=no
+set sidebar_folderindent=yes
+set sidebar_shortpath=yes
+
+# Ctrl-n, Ctrl-p to select next, previous folder.
+# Ctrl-o to open selected folder.
+bind index,pager \CK sidebar-prev
+bind index,pager \CJ sidebar-next
+bind index,pager \CO sidebar-open
+
+macro index b '<enter-command>toggle sidebar_visible<enter><refresh>'
+macro pager b '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+
+
+#=---------=#
+# mailboxes #
+#=---------=#
+mailboxes +INBOX
+mailboxes +INBOX.family
+mailboxes +INBOX.libvir-list
+mailboxes +INBOX.libvirt-users
+mailboxes +INBOX.muni
+mailboxes +INBOX.ACM
+mailboxes +INBOX.amazon
+mailboxes +INBOX.archlinux
+mailboxes +INBOX.blizzard
+mailboxes +INBOX.care2
+mailboxes +INBOX.coursera
+mailboxes +INBOX.fedora
+mailboxes +INBOX.fsf
+mailboxes +INBOX.pizza
+mailboxes +INBOX.stanford
+mailboxes +INBOX.stuba
+mailboxes +INBOX.sunpy
+mailboxes +INBOX.youtube
+mailboxes +INBOX.google
+mailboxes +INBOX.quora
+mailboxes +INBOX.coursera
+mailboxes +INBOX.Junk

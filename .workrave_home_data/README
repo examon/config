@@ -1,0 +1,2 @@
+* move workrave.ini to $HOME/.workrave
+* set datadir to path where you want to have stored data

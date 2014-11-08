@@ -1,0 +1,10 @@
+[user]
+	name = Tomas Meszaros
+	email = exo@tty.sk
+[sendemail]
+	smtpserver = smtp.websupport.sk
+	smtpuser = exo@tty.sk
+	smtpserverport = 25
+	from = Tomas Meszaros <exo@tty.sk>
+	confirm = auto
+	smtpencryption = tls
