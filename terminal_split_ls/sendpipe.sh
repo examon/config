@@ -10,7 +10,7 @@ function cdd() {
 
 function sendpipe() {
     PIPE=/tmp/catpipe
-    rm -r $PIPE
+    rm -rf $PIPE
     [[ ! -p $PIPE ]] && mkfifo $PIPE
 
     while true; do
