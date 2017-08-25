@@ -16,7 +16,8 @@ export MAIL="$HOME/Mail"
 #export JAVA_HOME=/usr/bin/java
 export JAVA_FONTS=/usr/share/fonts/TTF
 #export _JAVA_OPTIONS="-Dswing.aatext=true -Dawt.useSystemAAFontSettings=on"
-export _JAVA_OPTIONS="-Dswing.aatext=true -Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
+
+#export _JAVA_OPTIONS="-Dswing.aatext=true -Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
 export LIBVIRTD_PATH="/sbin/libvirtd"
 
 set show-all-if-ambiguous on
@@ -24,7 +25,7 @@ set bell-style visible
 
 alias x="startx"
 alias bb="sudo bleachbit --delete system.cache system.localizations system.trash system.tmp"
-alias suspend="sudo pm-suspend"
+alias suspend="systemctl suspend"
 alias r="./"
 alias lo="libreoffice"
 alias ur="urxvt"
@@ -34,7 +35,7 @@ alias mc="mc -b"
 alias e="setsid evince"
 alias z="setsid zathura"
 alias steps="$HOME/Github/stepc/stepc.py"
-alias ll="ls -l --group-directories-first"
+#alias ll="ls -l --group-directories-first"
 alias ls="ls -hF --color"   # add colors for filetype recognition
 alias la="ls -a"            # show hidden files
 alias lx="ls -xb"           # sort by extension
@@ -45,13 +46,14 @@ alias lt="ls -ltr"          # sort by date, most recent last
 alias lm="ls -al |more"     # pipe through 'more'
 alias lr="ls -lR"           # recursive ls
 alias lsr="tree -Csu"       # nice alternative to 'recursive ls'
-alias rm="echo Use trash from trash-cli package"
+#alias rm="echo Use trash from trash-cli package"
 alias sc="cd $HOME/Scripts"
 alias dw="cd $HOME/Downloads"
 alias edu="cd $HOME/Education"
 alias doc="cd $HOME/Documents"
 alias media="cd $HOME/Media"
 alias p2="python2"
+alias p3="python3"
 alias dt="cd ~/Dropbox/"
 alias rbt="sudo reboot"
 alias checkfs="$HOME/Scripts/fsck_check/fsck_check"
@@ -104,6 +106,31 @@ alias idea="$HOME/Software/idea/idea-IC-135.1230/bin/idea.sh"
 alias pycharm="$HOME/Software/pycharm-community-3.4.1/bin/pycharm.sh"
 alias cling="$HOME/Software/cling-Fedora20-x86_64-b714047cbb/bin/cling"
 alias c++="clang++ -std=c++11 -O0 -g -Wall -Wextra -pedantic"
+#alias backup_gamma2element="rsync -avz -delete /mnt/* /run/media/exo/b3a411ae-aafa-4a29-9eb3-2fb380eb54e1/gamma_backup"
+alias xwrits="xwrits -beep -finger typetime=15 breaktime=3 -breakclock -clock -mouse &"
+alias stylemaker="/home/exo/Code/stylemaker/stylemaker.py"
+alias gamma_mount="sudo mount -t ext4 /dev/mapper/gamma /mnt"
+alias gamma_encrypt="sudo cryptsetup open --type luks /dev/sdb1 gamma"
+alias youtube-dl-mp3="youtube-dl --extract-audio --audio-format mp3"
+alias fb="FBReader"
+alias ichooselife="mpv /mnt/Documents/archive/video/I_Choose_Life.mp4"
+alias epdf="/mnt/Documents/code/github/epdf/epdf.py"
+alias spdf="/mnt/Documents/code/github/spdf/spdf.py"
+alias jpdf="/mnt/Documents/code/github/jpdf/jpdf.py"
+alias mirror_web="wget -mkEpnp "
+alias androids="/mnt/Documents/apps/android-studio/bin/studio.sh"
+alias xev="xev | grep 'keycode'"
+alias evernote="nixnote2"
+alias latexdraw="java -jar /mnt/Documents/appdata/latexdraw/latexdraw/LaTeXDraw.jar"
+alias mnt="cd /mnt/Documents"
+alias sublime="/mnt/Documents/apps/sublime_text_3/sublime_text"
+alias visualparadigm="/mnt/Documents/appdata/Visual_Paradigm_CE_14.0/bin/Visual_Paradigm"
+alias vim="nvim"
+alias vim_format="echo \"vim: set ts=4 sts=4 sw=4 :\""
+alias keyus="setxkbmap us"
+alias keysk="setxkbmap sk"
+alias pandocpdf="pandoc -V geometry:margin=1in"
+
 
 #=------=#
 # Prompt #
@@ -295,7 +322,7 @@ function external_close() {
 }
 
 function external_full_system_backup() {
-    if [ $# -lt 1 ]; then 
+    if [ $# -lt 1 ]; then
         echo "No destination defined. Usage: $0 destination" >&2
         exit 1
     elif [ $# -gt 1 ]; then
@@ -316,8 +343,8 @@ function external_full_system_backup() {
       "/media/"*) ;;
       "/run/media") ;;
       "/run/media/"*) ;;
-      *) echo "Destination not allowed." >&2 
-         exit 1 
+      *) echo "Destination not allowed." >&2
+         exit 1
          ;;
     esac
 
@@ -325,6 +352,21 @@ function external_full_system_backup() {
     su -c "rsync -aAXv /* $1 --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/var/lib/pacman/sync/*}"
     FINISH=$(date +%s)
     echo "total time: $(( ($FINISH-$START) / 60 )) minutes, $(( ($FINISH-$START) % 60 )) seconds" | tee $1/"Backup from $(date '+%Y-%m-%d, %T, %A')"
+}
+
+function backup_gamma2element()
+{
+    cp /home/exo/.bashrc /mnt/Documents/library/archive/code/github/config/
+    cp -a /home/exo/.config/awesome/ /mnt/Documents/library/archive/code/github/config
+    cp -a /home/exo/.config/nvim/ /mnt/Documents/library/archive/code/github/config
+    cp -a /home/exo/.config/xfce4/terminal/terminalrc /mnt/Documents/library/archive/code/github/config
+    cp -a /home/exo/.workrave/workrave.ini /mnt/Documents/library/archive/code/github/config/.workrave
+    cp -a /home/exo/.fonts /mnt/Documents/library/archive/code/github/config
+    cp -a /home/exo/.config/i3/* /mnt/Documents/library/archive/code/github/config/.i3
+
+
+    #/mnt/Documents/library/archive/code/trello-full-backup/run_trello_backup.sh
+    #rsync -avz --delete /mnt/* /run/media/exo/b3a411ae-aafa-4a29-9eb3-2fb380eb54e1/gamma_backup
 }
 
 function aisa_upload()
@@ -347,6 +389,10 @@ function grepdir()
 function cd()
 {
      builtin cd "$*" && ls
+}
+
+function ll() {
+    xscreensaver-command -activate
 }
 
 # Google search bash function
@@ -464,4 +510,53 @@ function send_config_to() {
 
 function dotfiles() {
     $HOME/Github/dotfiles/dotfiles.sh "$@"
+}
+
+
+# PIPES
+
+function cdd() {
+    PIPE=/tmp/catpipe
+    cd $@
+    echo "@clear" > $PIPE
+    echo "@pwd" > $PIPE
+    echo "@echo" > $PIPE
+    echo "@cd $@" > $PIPE
+    echo "@ls" > $PIPE
+}
+
+function sendpipe() {
+    PIPE=/tmp/catpipe
+    #trap "rm -f $PIPE" exit 1
+    rm -r $PIPE
+    [[ ! -p $PIPE ]] && mkfifo $PIPE
+
+    while true; do
+        while read line; do
+            case "$line" in
+                @exit) rm -f $PIPE && exit 0;;
+                @*) eval "${line#@}" ;;
+                * ) echo "$line" ;;
+            esac
+        done <$PIPE
+    done
+}
+
+# ERGO TOUCHPAD
+function touchpadsetup() {
+    id="$(xinput list | grep -i cirque | cut -d '[' -f 1 | cut -d '=' -f 2)"
+    echo $id
+    xinput --set-prop --type=float --format=32  $id "libinput Accel Speed" 1
+}
+
+# startup commands
+function startup_cmds() {
+    xmodmap -e "keycode 117 = Next End" # shift + next = end
+    xmodmap -e "keycode 112 = Prior Home"
+    redshift &
+    workrave &
+    nm-applet &
+    xscreensaver &
+    touchpadsetup &
+    shutdown -h 21:00 &
 }
