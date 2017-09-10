@@ -35,7 +35,7 @@ alias mc="mc -b"
 alias e="setsid evince"
 alias z="setsid zathura"
 alias steps="$HOME/Github/stepc/stepc.py"
-#alias ll="ls -l --group-directories-first"
+alias ll="ls -l --group-directories-first"
 alias ls="ls -hF --color"   # add colors for filetype recognition
 alias la="ls -a"            # show hidden files
 alias lx="ls -xb"           # sort by extension
@@ -130,6 +130,10 @@ alias vim_format="echo \"vim: set ts=4 sts=4 sw=4 :\""
 alias keyus="setxkbmap us"
 alias keysk="setxkbmap sk"
 alias pandocpdf="pandoc -V geometry:margin=1in"
+alias backlight25="sudo tee /sys/class/backlight/intel_backlight/brightness <<< 220"
+alias backlight50="sudo tee /sys/class/backlight/intel_backlight/brightness <<< 420"
+alias backlight75="sudo tee /sys/class/backlight/intel_backlight/brightness <<< 620"
+alias backlight100="sudo tee /sys/class/backlight/intel_backlight/brightness <<< 850"
 
 
 #=------=#
@@ -391,9 +395,9 @@ function cd()
      builtin cd "$*" && ls
 }
 
-function ll() {
-    xscreensaver-command -activate
-}
+#function ll() {
+#    xscreensaver-command -activate
+#}
 
 # Google search bash function
 google() {

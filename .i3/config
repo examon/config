@@ -202,14 +202,14 @@ hide_edge_borders both
 bindsym $mod+BackSpace exec xscreensaver-command -activate
 
 # always start
-exec_always xmodmap -e "keycode 117 = Next End" # shift + next = end
-exec_always xmodmap -e "keycode 112 = Prior Home"
+#exec_always xmodmap -e "keycode 117 = Next End" # shift + next = end
+#exec_always xmodmap -e "keycode 112 = Prior Home"
 exec redshift
 exec workrave
 exec dbus-send --type=method_call --dest=org.workrave.Workrave /org/workrave/Workrave/Core org.workrave.CoreInterface.SetOperationMode string:'quiet'
 exec nm-applet
 exec xscreensaver
 exec compton -f
+exec megasync
 
-exec touchpadsetup
-
+#exec touchpadsetup
