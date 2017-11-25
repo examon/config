@@ -132,7 +132,6 @@ bindsym $mod+Shift+9 move container to workspace $9
 
 # use xprop for class finding
 assign [class="Google-chrome"] $9
-assign [class="hexchat"] $8
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -211,8 +210,6 @@ exec dbus-send --type=method_call --dest=org.workrave.Workrave /org/workrave/Wor
 exec nm-applet
 exec xscreensaver
 exec compton -f
-exec megasync
+
 exec touchpadsetup
 
-exec google-chrome
-exec hexchat
